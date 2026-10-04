@@ -1,0 +1,363 @@
+# VisionGuard - danger rules (v2)
+#
+# Each condition in all/any/none is a label OR a group name (group = "any of these labels").
+#   all  : every condition must hold
+#   any  : at least one must hold (optional)
+#   none : none may hold (optional)
+# A condition holds when one of its labels is selected AND its probability >= min_conf.
+#
+# Labels:
+#   * 132 attribute labels (personalMale, maskSurgical, hatCap, ...)
+#   * visual cues  : hoodUp, faceCovered, fullFaceHelmet               (CLIP on head crop)
+#   * hand cues    : weaponGun, wearingGloves (+ knife fused)          (CLIP on hand crops, benign classes compete)
+#   * objects      : weaponKnife, weaponBat, weaponScissors            (YOLO COCO near the person)
+#   * behaviour    : handsCoveringFace, lookingAround, hidingFaceDown, armsRaised,
+#                    running, fastApproach, pacing, edgeLurking        (pose keypoints + track history)
+#   * context      : loitering, avoidingCamera, groupConcealed, faceConcealedHigh  (computed by server)
+#   * scene        : camera occlusion is a separate scene alert (thresholds under `behavior`)
+#
+# Accuracy controls:
+#   min_hits : rule must be seen N times (~1 s apart, gaps shorter than `release` allowed) before alerting
+#   release  : consecutive misses that reset the counter / clear an active alert (hysteresis)
+#   severity : 0..1, combined with confidence into risk_score (risk level comes from the score)
+#   min_level: lowest risk level shown while the rule is active (e.g. weapons are always High)
+
+defaults:
+  min_conf: 0.45
+  min_hits: 2
+  release: 3
+
+# Risk level from risk_score (0..1)
+levels:
+  High: 0.75
+  Medium-High: 0.55
+  Medium: 0.35
+
+context:
+  loiter_seconds: 45          # in view this long -> "loitering"
+  avoid_camera_ratio: 0.7     # share of recent evaluations in back view -> "avoidingCamera"
+  avoid_camera_min_seconds: 8
+  group_min_persons: 2        # >= N people concealing faces at the same time -> "groupConcealed"
+
+# Behaviour detectors (backend/behavior.py). Windows in seconds; ratios = share of frames in the window.
+behavior:
+  kp_conf: 0.4                # min keypoint confidence
+  hands_face_window: 3.0      # handsCoveringFace: wrist on the face in >= 60% of the last 3 s
+  hands_face_ratio: 0.6
+  look_window: 6.0            # lookingAround: head turns left<->right >= 3 times in 6 s
+  look_yaw: 0.25
+  look_switches: 3
+  head_down_window: 6.0       # hidingFaceDown: nose below the ear line in >= 70% of 6 s
+  head_down_ratio: 0.7
+  head_down_pitch: 0.45
+  arms_window: 1.5            # armsRaised: both wrists above the head
+  arms_ratio: 0.5
+  run_speed: 1.5              # running: >= 1.5 body heights / second
+  approach_window: 1.5        # fastApproach: box area x1.8 within 1.5 s and >= 10% of the frame
+  approach_growth: 1.8
+  approach_min_area: 0.10
+  pacing_window: 20.0         # pacing: >= 3 direction reversals (steps >= 0.3 body height) in 20 s
+  pacing_reversals: 3
+  pacing_step: 0.3
+  pacing_min_dwell: 15.0
+  edge_window: 10.0           # edgeLurking: half outside the left/right edge for >= 80% of 10 s
+  edge_ratio: 0.8
+  edge_min_dwell: 10.0
+  occlusion_std: 10.0         # camera occlusion: frame contrast < 10 or brightness < 12 for 2 s
+  occlusion_dark: 12.0
+  occlusion_seconds: 2.0
+
+# Weighted face-concealment score: 1 - prod(1 - weight * prob).
+# >= threshold adds the "faceConcealedHigh" label; >= concealed_threshold counts the person as
+# "concealed" for groupConcealed / loitering rules.
+concealment:
+  threshold: 0.70
+  concealed_threshold: 0.45
+  weights:
+    faceCovered: 0.85
+    fullFaceHelmet: 0.60
+    maskSurgical: 0.35
+    maskClothN95: 0.45
+    glassesSunglasses: 0.35
+    hoodUp: 0.35
+    accessoryKerchief: 0.30
+    accessoryMuffler: 0.25
+    hatCap: 0.15
+    hatBeanie: 0.20
+    hatOthers: 0.15
+    hatHelmet: 0.15
+    handsCoveringFace: 0.30
+    hidingFaceDown: 0.20
+
+groups:
+  MASK: [maskSurgical, maskClothN95]
+  HEADCOVER: [hatCap, hatBeanie, hatOthers, hoodUp]
+  ANYHAT: [hatCap, hatBeanie, hatOthers, hatHelmet, hoodUp]
+  SCARF: [accessoryMuffler, accessoryKerchief]
+  DARK_TOP: [upperBodyBlack, upperBodyGrey]
+  COVER_TOP: [upperBodyJacket, upperBodySweater]
+  LUGGAGE: [carryingSuitcase, carryingLuggageCase]
+  BIG_BAG: [carryingSuitcase, carryingLuggageCase, carryingBackpack]
+  WEAPON_DET: [weaponKnife, weaponBat, weaponScissors]   # detected by YOLO (or strong hand-crop knife)
+  WEAPON: [WEAPON_DET, weaponGun]                       # weaponGun is CLIP-only -> never in instant rules
+  FACE_HIDE: [MASK, SCARF, faceCovered]          # groups can include other groups
+  CONCEAL_ANY: [FACE_HIDE, glassesSunglasses, HEADCOVER, fullFaceHelmet]
+  SUSPICIOUS_MOVE: [running, fastApproach, pacing]
+
+rules:
+  # ---- Threat items (highest priority, fire immediately) ----
+  - id: R01
+    category: Threat Item
+    risk: High
+    severity: 1.0
+    all: [WEAPON_DET]
+    any: [FACE_HIDE, glassesSunglasses, ANYHAT]
+    min_conf: 0.35
+    min_hits: 1
+    min_level: High
+    desc: "Mang hung khí và che giấu diện mạo"
+
+  - id: R02
+    category: Threat Item
+    risk: High
+    severity: 0.9
+    all: [WEAPON_DET]
+    min_conf: 0.40
+    min_hits: 1
+    min_level: High
+    desc: "Phát hiện vật nghi là hung khí (dao / gậy / kéo) trên tay đối tượng"
+
+  # ---- Full face concealment (covers old rules 1-6, 9-10 and more) ----
+  - id: R03
+    category: Full Face Concealment
+    risk: High
+    severity: 0.95
+    all: [faceCovered]
+    min_conf: 0.70
+    min_level: High
+    desc: "Trùm kín mặt (mặt nạ trùm đầu / khăn che chỉ hở mắt)"
+
+  - id: R04
+    category: Full Face Concealment
+    risk: High
+    severity: 0.85
+    all: [MASK, glassesSunglasses, HEADCOVER]
+    desc: "Che kín mặt: khẩu trang + kính râm + mũ / mũ trùm"
+
+  - id: R05
+    category: Suspicious Helmet & Mask
+    risk: High
+    severity: 0.75
+    all: [MASK, glassesSunglasses, hatHelmet]
+    desc: "Đội mũ bảo hiểm + khẩu trang + kính râm che diện mạo"
+
+  - id: R06
+    category: Suspicious Helmet & Mask
+    risk: Medium-High
+    severity: 0.65
+    all: [fullFaceHelmet]
+    min_conf: 0.70
+    min_hits: 3
+    desc: "Đội mũ bảo hiểm kín mặt khi đứng trước camera"
+
+  - id: R07
+    category: Face Concealment with Scarf
+    risk: Medium-High
+    severity: 0.7
+    all: [SCARF, glassesSunglasses]
+    any: [MASK, HEADCOVER]
+    desc: "Khăn trùm / khăn quàng + kính râm + khẩu trang hoặc mũ che mặt"
+
+  - id: R08
+    category: Face Concealment with Scarf
+    risk: Medium-High
+    severity: 0.65
+    all: [MASK, accessoryMuffler, HEADCOVER]
+    desc: "Che mặt bằng khẩu trang + khăn quàng cổ + mũ"
+
+  - id: R09
+    category: Hooded Concealment
+    risk: Medium-High
+    severity: 0.65
+    all: [hoodUp, MASK]
+    desc: "Kéo mũ trùm hoodie lên đầu kết hợp đeo khẩu trang"
+
+  # ---- Outfit / luggage combos (old 11-14, broadened) ----
+  - id: R10
+    category: Dark Concealed Outfit
+    risk: High
+    severity: 0.8
+    all: [MASK, glassesSunglasses, COVER_TOP, DARK_TOP]
+    desc: "Trang phục tối màu (áo khoác / hoodie) + khẩu trang + kính râm"
+
+  - id: R11
+    category: Suspicious Luggage & Concealment
+    risk: Medium-High
+    severity: 0.7
+    all: [LUGGAGE, MASK, HEADCOVER]
+    desc: "Mang vali / hành lý + che mặt (khẩu trang + mũ)"
+
+  - id: R12
+    category: Partial Face Concealment
+    risk: Medium
+    severity: 0.5
+    all: [glassesSunglasses, HEADCOVER, SCARF]
+    none: [MASK]
+    desc: "Che phủ khuôn mặt không có khẩu trang (kính râm + mũ + khăn)"
+
+  # ---- Generic weighted concealment (catches combos not listed above) ----
+  - id: R13
+    category: Face Concealment
+    risk: Medium-High
+    severity: 0.7
+    all: [faceConcealedHigh]
+    min_conf: 0.0
+    min_hits: 3
+    desc: "Mức độ che giấu khuôn mặt tổng hợp cao"
+
+  # ---- Context / behaviour ----
+  - id: R14
+    category: Group Concealment
+    risk: High
+    severity: 0.8
+    all: [groupConcealed]
+    min_conf: 0.0
+    desc: "Nhiều người cùng che giấu khuôn mặt trong khung hình"
+
+  - id: R15
+    category: Loitering
+    risk: Medium-High
+    severity: 0.6
+    all: [loitering]
+    any: [FACE_HIDE, glassesSunglasses, hoodUp]
+    min_conf: 0.45
+    desc: "Lảng vảng lâu trước camera khi đang che mặt"
+
+  - id: R16
+    category: Camera Avoidance
+    risk: Medium
+    severity: 0.45
+    all: [avoidingCamera]
+    any: [ANYHAT, BIG_BAG]
+    min_conf: 0.45
+    desc: "Liên tục quay lưng / né camera, đội mũ hoặc mang túi lớn"
+
+  - id: R17
+    category: Suspicious Luggage & Concealment
+    risk: Medium
+    severity: 0.45
+    all: [BIG_BAG, faceConcealedHigh]
+    min_conf: 0.0
+    desc: "Mang balo / vali lớn khi khuôn mặt bị che giấu nhiều"
+
+  # ---- Behaviour from pose + tracking (v3) ----
+  - id: R18
+    category: Threat Item
+    risk: High
+    severity: 0.95
+    all: [weaponGun]
+    min_conf: 0.60
+    min_hits: 2
+    min_level: High
+    desc: "Nghi cầm súng trên tay (xác nhận qua 2 lần phân tích)"
+
+  - id: R19
+    category: Attack Posture
+    risk: High
+    severity: 1.0
+    all: [WEAPON_DET, armsRaised]
+    min_conf: 0.35
+    min_hits: 1
+    min_level: High
+    desc: "Tư thế tấn công: giơ / vung tay khi đang cầm hung khí"
+
+  - id: R20
+    category: Hiding Face
+    risk: Medium-High
+    severity: 0.6
+    all: [handsCoveringFace]
+    any: [MASK, glassesSunglasses, HEADCOVER, lookingAround]
+    min_conf: 0.45
+    min_hits: 3
+    desc: "Dùng tay che mặt kéo dài khi đang che giấu diện mạo / nhìn ngó"
+
+  - id: R21
+    category: Hiding Face
+    risk: Medium
+    severity: 0.45
+    all: [hidingFaceDown]
+    any: [HEADCOVER, MASK]
+    min_hits: 3
+    desc: "Cúi gằm mặt né camera, kết hợp đội mũ / đeo khẩu trang"
+
+  - id: R22
+    category: Scouting
+    risk: Medium-High
+    severity: 0.6
+    all: [lookingAround]
+    any: [CONCEAL_ANY]
+    desc: "Liên tục nhìn ngó xung quanh khi đang che mặt"
+
+  - id: R23
+    category: Scouting
+    risk: Medium
+    severity: 0.45
+    all: [lookingAround, loitering]
+    min_conf: 0.3
+    desc: "Lảng vảng lâu và liên tục nhìn ngó xung quanh (thăm dò)"
+
+  - id: R24
+    category: Scouting
+    risk: Medium
+    severity: 0.45
+    all: [pacing]
+    any: [loitering, CONCEAL_ANY]
+    min_conf: 0.3
+    desc: "Đi tới đi lui nhiều lần trước camera"
+
+  - id: R25
+    category: Rapid Movement
+    risk: High
+    severity: 0.85
+    all: [fastApproach]
+    any: [FACE_HIDE, faceCovered, WEAPON, fullFaceHelmet]
+    min_conf: 0.35
+    min_hits: 1
+    desc: "Lao nhanh về phía camera khi đang che mặt / mang hung khí"
+
+  - id: R26
+    category: Rapid Movement
+    risk: Medium-High
+    severity: 0.6
+    all: [running]
+    any: [CONCEAL_ANY, WEAPON, BIG_BAG]
+    min_conf: 0.35
+    min_hits: 1
+    desc: "Chạy / di chuyển rất nhanh khi che mặt hoặc mang đồ"
+
+  - id: R27
+    category: Concealment
+    risk: Medium-High
+    severity: 0.6
+    all: [wearingGloves]
+    any: [FACE_HIDE, glassesSunglasses, hoodUp]
+    min_conf: 0.6
+    desc: "Đeo găng tay kết hợp che giấu khuôn mặt"
+
+  - id: R28
+    category: Lurking
+    risk: Medium
+    severity: 0.45
+    all: [edgeLurking]
+    any: [CONCEAL_ANY, lookingAround]
+    min_conf: 0.45
+    desc: "Nấp ở mép khung hình, che mặt hoặc nhìn ngó"
+
+  - id: R29
+    category: Combined Behaviour
+    risk: High
+    severity: 0.8
+    all: [faceConcealedHigh]
+    any: [lookingAround, SUSPICIOUS_MOVE, edgeLurking, handsCoveringFace]
+    min_conf: 0.0
+    desc: "Che mặt mức cao kèm hành vi bất thường (nhìn ngó / di chuyển bất thường / nấp)"

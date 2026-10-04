@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VisionGuard - Nhận Diện Từ Ảnh</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-left">
+                <div class="logo-container">
+                    <i data-lucide="shield-check" class="logo-icon"></i>
+                    <div class="logo-text">
+                        <h1>VisionGuard</h1>
+                        <span class="logo-subtitle">HỆ THỐNG NHẬN DIỆN THÔNG MINH</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="header-right">
+                <div class="server-status">
+                    <span class="status-indicator online"></span>
+                    <span class="status-text">Chế độ: Tải ảnh lên</span>
+                </div>
+                <a href="index.html" class="settings-btn" title="Chuyển chế độ nhận diện" style="text-decoration: none;">
+                    <i data-lucide="grid"></i>
+                </a>
+                <button class="settings-btn" title="Cài đặt">
+                    <i data-lucide="settings"></i>
+                </button>
+                <div class="user-profile">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=150&auto=format&fit=crop" alt="User Avatar" class="avatar">
+                    <div class="user-info">
+                        <span class="user-name">Trần Minh Hoàng</span>
+                        <span class="user-role">Giám sát viên</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Content Area -->
+        <main class="main-content">
+            <!-- Left Column: Camera Feed -->
+            <section class="camera-section">
+                <div class="section-header">
+                    <div class="camera-title-group">
+                        <h2>Phân Tích Ảnh Tải Lên</h2>
+                    </div>
+                    <div class="camera-specs">
+                        Độ phân giải: <span id="res-val">--</span> | Người: <span id="persons-val">0</span>
+                    </div>
+                </div>
+
+                <!-- Drop zone / analysed image -->
+                <div class="video-container upload-drop" id="upload-drop">
+                    <div class="video-overlay top-left">
+                        <span class="sys-status">SYS.OK</span>
+                        <span class="rec-status" id="engine-status">AI: --</span>
+                    </div>
+                    <div class="video-overlay top-right">
+                        <span class="analysis-status">
+                            <span class="spinner"></span>
+                            <span id="analysis-text">Chưa có ảnh</span>
+                        </span>
+                    </div>
+
+                    <div class="upload-placeholder" id="upload-placeholder">
+                        <i data-lucide="upload-cloud"></i>
+                        <p>Kéo thả ảnh vào đây hoặc bấm để chọn</p>
+                        <span>JPG / PNG / WEBP — mỗi người trong ảnh được đánh giá riêng</span>
+                    </div>
+                    <img alt="Ảnh phân tích" class="video-feed" id="video-feed-el" style="display: none;">
+
+                    <div id="target-box" class="target-hud" style="display: none;">
+                        <span class="hud-label">ĐỐI TƯỢNG ĐÁNG NGỜ</span>
+                        <div class="hud-corners"></div>
+                        <div class="hud-center-text">DANGER DETECTED</div>
+                    </div>
+                </div>
+                <input type="file" id="upload-input" accept="image/*" hidden>
+
+                <div class="camera-details-card">
+                    <div class="details-left">
+                        <div class="camera-icon-wrapper">
+                            <i data-lucide="image"></i>
+                        </div>
+                        <div class="details-text">
+                            <h3 id="upload-name">Chưa chọn ảnh</h3>
+                            <p>Chọn người để xem đặc điểm và đánh giá rủi ro</p>
+                        </div>
+                    </div>
+                    <div class="details-right upload-actions">
+                        <div class="person-chips" id="person-chips"></div>
+                        <button class="upload-btn" id="upload-btn" type="button">
+                            <i data-lucide="upload"></i> Chọn ảnh
+                        </button>
+                    </div>
+                </div>
+                <span id="current-time" hidden></span>
+            </section>
+
+            <!-- Right Column: Recognition Attributes & Alert System -->
+            <section class="attributes-section">
+                <!-- Alerts Container -->
+                <div class="alerts-container">
+                    <!-- Red warning alert -->
+                    <div id="alert-warning" class="alert-box alert-danger" style="display: none;">
+                        <div class="alert-icon-wrapper">
+                            <i data-lucide="alert-triangle"></i>
+                        </div>
+                        <div class="alert-content">
+                            <h4>CẢNH BÁO</h4>
+                            <p>Phát hiện nguy hiểm!</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Green safe alert -->
+                    <div id="alert-safe" class="alert-box alert-success">
+                        <div class="alert-icon-wrapper">
+                            <i data-lucide="check-circle-2"></i>
+                        </div>
+                        <div class="alert-content">
+                            <h4>An toàn</h4>
+                            <p>Không có dấu hiệu nguy hiểm</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recognition Attributes Card -->
+                <div class="attributes-card">
+                    <div class="card-header">
+                        <i data-lucide="scan-face" class="card-header-icon"></i>
+                        <h3>Đặc điểm nhận dạng</h3>
+                    </div>
+                    
+                    <div class="card-body">
+                        <!-- Group 1: General Info -->
+                        <div class="attribute-group">
+                            <h4 class="group-title">THÔNG TIN CHUNG</h4>
+                            <div class="attribute-row" id="row-gender">
+                                <span class="attr-label">Giới tính</span>
+                                <span class="attr-value" id="attr-gender">Chưa có dữ liệu</span>
+                            </div>
+                            <div class="attribute-row" id="row-age">
+                                <span class="attr-label">Độ tuổi ước tính</span>
+                                <span class="attr-value" id="attr-age">Chưa có dữ liệu</span>
+                            </div>
+                            <div class="attribute-row" id="row-height">
+                                <span class="attr-label">Chiều cao ước tính</span>
+                                <span class="attr-value" id="attr-height">~175cm</span>
+                            </div>
+                        </div>
+
+                        <!-- Group 2: Clothing -->
+                        <div class="attribute-group">
+                            <h4 class="group-title">TRANG PHỤC</h4>
+                            <div class="attribute-row" id="row-upper">
+                                <span class="attr-label">Áo</span>
+                                <span class="attr-value" id="attr-upper">Chưa có dữ liệu</span>
+                            </div>
+                            <div class="attribute-row" id="row-lower">
+                                <span class="attr-label">Quần</span>
+                                <span class="attr-value" id="attr-lower">Chưa có dữ liệu</span>
+                            </div>
+                            <div class="attribute-row" id="row-footwear">
+                                <span class="attr-label">Giày</span>
+                                <span class="attr-value" id="attr-footwear">Chưa có dữ liệu</span>
+                            </div>
+                        </div>
+
+                        <!-- Group 3: Accessories & Items -->
+                        <div class="attribute-group">
+                            <div class="group-title-container">
+                                <h4 class="group-title">PHỤ KIỆN & VẬT DỤNG</h4>
+                                <span class="items-badge" id="accessories-count">0 phát hiện</span>
+                            </div>
+                            <div id="accessories-list" class="accessories-list">
+                                <!-- Dynamic accessories & detected items will be injected here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Group 4: Risk Assessment -->
+                    <div class="risk-assessment-section" id="risk-box">
+                        <div class="risk-title">ĐÁNH GIÁ RỦI RO</div>
+                        <div class="risk-row">
+                            <span class="risk-label">Mức độ rủi ro:</span>
+                            <span class="risk-badge badge-green" id="risk-level">THẤP</span>
+                        </div>
+                        <div class="risk-danger-section" id="risk-reason-container" style="display: none;">
+                            <span class="risk-danger-title">CÁC DẤU HIỆU NGUY HIỂM PHÁT HIỆN:</span>
+                            <div class="risk-danger-list" id="danger-signs-list">
+                                <!-- Danger rules printed here in bold red text -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>

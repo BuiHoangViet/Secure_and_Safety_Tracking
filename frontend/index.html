@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VisionGuard - Chọn Chế Độ Nhận Diện</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div class="dashboard selection-dashboard">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-left">
+                <div class="logo-container">
+                    <i data-lucide="shield-check" class="logo-icon"></i>
+                    <div class="logo-text">
+                        <h1>VisionGuard</h1>
+                        <span class="logo-subtitle">HỆ THỐNG NHẬN DIỆN THÔNG MINH</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="header-right">
+                <button class="settings-btn" title="Cài đặt">
+                    <i data-lucide="settings"></i>
+                </button>
+                <div class="user-profile">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=150&auto=format&fit=crop" alt="User Avatar" class="avatar">
+                    <div class="user-info">
+                        <span class="user-name">Quản trị viên</span>
+                        <span class="user-role">admin@visionguard.vn</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Mode Selection Content -->
+        <main class="selection-container">
+            <div class="selection-title-group">
+                <h2>Chọn chế độ nhận diện</h2>
+                <p>Vui lòng chọn một trong hai chế độ bên dưới để bắt đầu</p>
+            </div>
+
+            <div class="mode-cards-grid">
+                <!-- Card 1: Real-time Recognition -->
+                <div class="mode-card card-realtime">
+                    <div class="mode-icon-badge badge-blue">
+                        <i data-lucide="camera" class="mode-icon"></i>
+                    </div>
+                    <div class="mode-card-content">
+                        <h3>Nhận diện Thời gian thực</h3>
+                        <p>Kết nối camera trực tiếp để phát hiện và phân tích đặc điểm người trong thời gian thực. Tự động cảnh báo khi phát hiện đối tượng nguy hiểm.</p>
+                    </div>
+                    <div class="mode-card-footer">
+                        <span class="pill-tag tag-blue">Camera trực tiếp</span>
+                        <a href="realtime.html" class="start-button btn-realtime">Bắt đầu</a>
+                    </div>
+                </div>
+
+                <!-- Card 2: Upload Image Recognition -->
+                <div class="mode-card card-upload" style="cursor: pointer;" onclick="window.location.href='upload.html'">
+                    <div class="mode-icon-badge badge-green">
+                        <i data-lucide="upload-cloud" class="mode-icon"></i>
+                    </div>
+                    <div class="mode-card-content">
+                        <h3>Tải ảnh lên để Nhận diện</h3>
+                        <p>Tải lên hình ảnh từ thiết bị của bạn để mô hình AI phân tích và trích xuất các đặc điểm nhận dạng chi tiết.</p>
+                    </div>
+                    <div class="mode-card-footer">
+                        <span class="pill-tag tag-green">Upload ảnh</span>
+                        <a href="upload.html" class="start-button btn-upload" onclick="event.stopPropagation()">Bắt đầu</a>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="selection-footer">
+            <p>Phiên bản 1.0 · VisionGuard © 2026</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.lucide) {
+                window.lucide.createIcons();
+            }
+        });
+    </script>
+</body>
+</html>

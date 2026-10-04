@@ -1,0 +1,365 @@
+{
+  "name": "current_attributes",
+  "version": 2,
+  "schema": {
+    "label_count": 132,
+    "labels": [
+      "personalLess15",
+      "personalLess30",
+      "personalLess45",
+      "personalLess60",
+      "personalLarger60",
+      "personalMale",
+      "personalFemale",
+      "bodyFull",
+      "bodyUpperHalf",
+      "bodyLowerHalf",
+      "accessoryMuffler",
+      "accessoryNothing",
+      "accessoryHeadphone",
+      "accessoryHairBand",
+      "accessoryKerchief",
+      "hatNone",
+      "hatCap",
+      "hatBeanie",
+      "hatHelmet",
+      "hatOthers",
+      "hatBlack",
+      "hatGrey",
+      "hatWhite",
+      "hatBrown",
+      "hatRed",
+      "hatPink",
+      "hatYellow",
+      "hatOrange",
+      "hatGreen",
+      "hatBlue",
+      "hatPurple",
+      "maskNone",
+      "maskSurgical",
+      "maskClothN95",
+      "glassesNone",
+      "glassesEyeglasses",
+      "glassesSunglasses",
+      "glassesOthers",
+      "carryingBackpack",
+      "carryingOther",
+      "carryingMessengerBag",
+      "carryingNothing",
+      "carryingPlasticBags",
+      "carryingBabyBuggy",
+      "carryingShoppingTro",
+      "carryingUmbrella",
+      "carryingFolder",
+      "carryingLuggageCase",
+      "carryingSuitcase",
+      "hairShort",
+      "hairLong",
+      "hairBald",
+      "hairBlack",
+      "hairGrey",
+      "hairWhite",
+      "hairBrown",
+      "hairRed",
+      "hairPink",
+      "hairYellow",
+      "hairOrange",
+      "hairGreen",
+      "hairBlue",
+      "hairPurple",
+      "upperBodyShortSleeve",
+      "upperBodyLongSleeve",
+      "upperBodyCasual",
+      "upperBodyFormal",
+      "upperBodyJacket",
+      "upperBodyLogo",
+      "upperBodyPlaid",
+      "upperBodyThinStripes",
+      "upperBodyTshirt",
+      "upperBodyOther",
+      "upperBodyVNeck",
+      "upperBodyNoSleeve",
+      "upperBodySuit",
+      "upperBodySweater",
+      "upperBodyThickStripes",
+      "upperBodyBlack",
+      "upperBodyGrey",
+      "upperBodyWhite",
+      "upperBodyBrown",
+      "upperBodyRed",
+      "upperBodyPink",
+      "upperBodyYellow",
+      "upperBodyOrange",
+      "upperBodyGreen",
+      "upperBodyBlue",
+      "upperBodyPurple",
+      "lowerBodyShorts",
+      "lowerBodyTrousers",
+      "lowerBodyShortSkirt",
+      "lowerBodyLongSkirt",
+      "lowerBodyCasual",
+      "lowerBodyFormal",
+      "lowerBodyJeans",
+      "lowerBodyCapri",
+      "lowerBodyHotPants",
+      "lowerBodyPlaid",
+      "lowerBodyThinStripes",
+      "lowerBodySuits",
+      "lowerBodyBlack",
+      "lowerBodyGrey",
+      "lowerBodyWhite",
+      "lowerBodyBrown",
+      "lowerBodyRed",
+      "lowerBodyPink",
+      "lowerBodyYellow",
+      "lowerBodyOrange",
+      "lowerBodyGreen",
+      "lowerBodyBlue",
+      "lowerBodyPurple",
+      "footwearShoes",
+      "footwearLeatherShoes",
+      "footwearSandals",
+      "footwearSneaker",
+      "footwearBoots",
+      "footwearStocking",
+      "footwearBlack",
+      "footwearGrey",
+      "footwearWhite",
+      "footwearBrown",
+      "footwearRed",
+      "footwearPink",
+      "footwearYellow",
+      "footwearOrange",
+      "footwearGreen",
+      "footwearBlue",
+      "footwearPurple",
+      "viewpointFront",
+      "viewpointBack",
+      "viewpointSide"
+    ]
+  },
+  "groups": {
+    "age": {
+      "count": 5,
+      "labels": [
+        "personalLess15",
+        "personalLess30",
+        "personalLess45",
+        "personalLess60",
+        "personalLarger60"
+      ]
+    },
+    "gender": {
+      "count": 2,
+      "labels": [
+        "personalMale",
+        "personalFemale"
+      ]
+    },
+    "body": {
+      "count": 3,
+      "labels": [
+        "bodyFull",
+        "bodyUpperHalf",
+        "bodyLowerHalf"
+      ]
+    },
+    "accessory": {
+      "count": 5,
+      "labels": [
+        "accessoryMuffler",
+        "accessoryNothing",
+        "accessoryHeadphone",
+        "accessoryHairBand",
+        "accessoryKerchief"
+      ]
+    },
+    "hat_type": {
+      "count": 5,
+      "labels": [
+        "hatNone",
+        "hatCap",
+        "hatBeanie",
+        "hatHelmet",
+        "hatOthers"
+      ]
+    },
+    "hat_color": {
+      "count": 11,
+      "labels": [
+        "hatBlack",
+        "hatGrey",
+        "hatWhite",
+        "hatBrown",
+        "hatRed",
+        "hatPink",
+        "hatYellow",
+        "hatOrange",
+        "hatGreen",
+        "hatBlue",
+        "hatPurple"
+      ]
+    },
+    "mask_type": {
+      "count": 3,
+      "labels": [
+        "maskNone",
+        "maskSurgical",
+        "maskClothN95"
+      ]
+    },
+    "glasses_type": {
+      "count": 4,
+      "labels": [
+        "glassesNone",
+        "glassesEyeglasses",
+        "glassesSunglasses",
+        "glassesOthers"
+      ]
+    },
+    "carrying": {
+      "count": 11,
+      "labels": [
+        "carryingBackpack",
+        "carryingOther",
+        "carryingMessengerBag",
+        "carryingNothing",
+        "carryingPlasticBags",
+        "carryingBabyBuggy",
+        "carryingShoppingTro",
+        "carryingUmbrella",
+        "carryingFolder",
+        "carryingLuggageCase",
+        "carryingSuitcase"
+      ]
+    },
+    "hair_style": {
+      "count": 3,
+      "labels": [
+        "hairShort",
+        "hairLong",
+        "hairBald"
+      ]
+    },
+    "hair_color": {
+      "count": 11,
+      "labels": [
+        "hairBlack",
+        "hairGrey",
+        "hairWhite",
+        "hairBrown",
+        "hairRed",
+        "hairPink",
+        "hairYellow",
+        "hairOrange",
+        "hairGreen",
+        "hairBlue",
+        "hairPurple"
+      ]
+    },
+    "upper_body_style": {
+      "count": 15,
+      "labels": [
+        "upperBodyShortSleeve",
+        "upperBodyLongSleeve",
+        "upperBodyCasual",
+        "upperBodyFormal",
+        "upperBodyJacket",
+        "upperBodyLogo",
+        "upperBodyPlaid",
+        "upperBodyThinStripes",
+        "upperBodyTshirt",
+        "upperBodyOther",
+        "upperBodyVNeck",
+        "upperBodyNoSleeve",
+        "upperBodySuit",
+        "upperBodySweater",
+        "upperBodyThickStripes"
+      ]
+    },
+    "upper_body_color": {
+      "count": 11,
+      "labels": [
+        "upperBodyBlack",
+        "upperBodyGrey",
+        "upperBodyWhite",
+        "upperBodyBrown",
+        "upperBodyRed",
+        "upperBodyPink",
+        "upperBodyYellow",
+        "upperBodyOrange",
+        "upperBodyGreen",
+        "upperBodyBlue",
+        "upperBodyPurple"
+      ]
+    },
+    "lower_body_style": {
+      "count": 12,
+      "labels": [
+        "lowerBodyShorts",
+        "lowerBodyTrousers",
+        "lowerBodyShortSkirt",
+        "lowerBodyLongSkirt",
+        "lowerBodyCasual",
+        "lowerBodyFormal",
+        "lowerBodyJeans",
+        "lowerBodyCapri",
+        "lowerBodyHotPants",
+        "lowerBodyPlaid",
+        "lowerBodyThinStripes",
+        "lowerBodySuits"
+      ]
+    },
+    "lower_body_color": {
+      "count": 11,
+      "labels": [
+        "lowerBodyBlack",
+        "lowerBodyGrey",
+        "lowerBodyWhite",
+        "lowerBodyBrown",
+        "lowerBodyRed",
+        "lowerBodyPink",
+        "lowerBodyYellow",
+        "lowerBodyOrange",
+        "lowerBodyGreen",
+        "lowerBodyBlue",
+        "lowerBodyPurple"
+      ]
+    },
+    "footwear_type": {
+      "count": 6,
+      "labels": [
+        "footwearShoes",
+        "footwearLeatherShoes",
+        "footwearSandals",
+        "footwearSneaker",
+        "footwearBoots",
+        "footwearStocking"
+      ]
+    },
+    "footwear_color": {
+      "count": 11,
+      "labels": [
+        "footwearBlack",
+        "footwearGrey",
+        "footwearWhite",
+        "footwearBrown",
+        "footwearRed",
+        "footwearPink",
+        "footwearYellow",
+        "footwearOrange",
+        "footwearGreen",
+        "footwearBlue",
+        "footwearPurple"
+      ]
+    },
+    "viewpoint": {
+      "count": 3,
+      "labels": [
+        "viewpointFront",
+        "viewpointBack",
+        "viewpointSide"
+      ]
+    }
+  }
+}

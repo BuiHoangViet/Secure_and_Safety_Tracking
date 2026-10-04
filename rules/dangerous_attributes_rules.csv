@@ -1,0 +1,78 @@
+Rule_ID,Rule_Condition,Category,Risk_Level,Description
+1,"{
+  maskSurgical,
+  glassesSunglasses,
+  hatCap
+}",Full Face Concealment,High,Che kín mặt hoàn toàn (Khẩu trang y tế + Kính râm + Mũ lưỡi trai)
+2,"{
+  maskClothN95,
+  glassesSunglasses,
+  hatCap
+}",Full Face Concealment,High,Che kín mặt hoàn toàn (Khẩu trang N95/vải + Kính râm + Mũ lưỡi trai)
+3,"{
+  maskSurgical,
+  glassesSunglasses,
+  hatBeanie
+}",Full Face Concealment,High,Che kín mặt (Khẩu trang y tế + Kính râm + Mũ len)
+4,"{
+  maskClothN95,
+  glassesSunglasses,
+  hatBeanie
+}",Full Face Concealment,High,Che kín mặt (Khẩu trang N95/vải + Kính râm + Mũ len)
+5,"{
+  maskSurgical,
+  glassesSunglasses,
+  hatHelmet
+}",Suspicious Helmet & Mask,High,Đội mũ bảo hiểm kết hợp khẩu trang y tế và kính râm che diện mạo
+6,"{
+  maskClothN95,
+  glassesSunglasses,
+  hatHelmet
+}",Suspicious Helmet & Mask,High,Đội mũ bảo hiểm kết hợp khẩu trang N95/vải và kính râm che diện mạo
+7,"{
+  maskSurgical,
+  accessoryMuffler,
+  hatCap
+}",Face Concealment with Muffler,Medium-High,Che mặt bằng Khẩu trang y tế + Khăn quàng cổ + Mũ lưỡi trai
+8,"{
+  maskClothN95,
+  accessoryMuffler,
+  hatCap
+}",Face Concealment with Muffler,Medium-High,Che mặt bằng Khẩu trang N95/vải + Khăn quàng cổ + Mũ lưỡi trai
+9,"{
+  maskSurgical,
+  accessoryKerchief,
+  glassesSunglasses
+}",Face Concealment with Kerchief,Medium-High,Khăn trùm đầu/cổ + Khẩu trang y tế + Kính râm
+10,"{
+  maskClothN95,
+  accessoryKerchief,
+  glassesSunglasses
+}",Face Concealment with Kerchief,Medium-High,Khăn trùm đầu/cổ + Khẩu trang N95/vải + Kính râm
+11,"{
+  maskSurgical,
+  glassesSunglasses,
+  upperBodyJacket,
+  upperBodyBlack
+}",Dark Concealed Outfit,High,Trang phục đen ngụy trang (Áo khoác đen + Khẩu trang y tế + Kính râm)
+12,"{
+  maskClothN95,
+  glassesSunglasses,
+  upperBodyJacket,
+  upperBodyBlack
+}",Dark Concealed Outfit,High,Trang phục đen ngụy trang (Áo khoác đen + Khẩu trang N95/vải + Kính râm)
+13,"{
+  maskSurgical,
+  hatCap,
+  carryingLuggageCase
+}",Suspicious Luggage & Concealment,Medium-High,Mang hành lý/vali nguy vấn + Che mặt (Khẩu trang + Mũ)
+14,"{
+  maskClothN95,
+  hatCap,
+  carryingSuitcase
+}",Suspicious Luggage & Concealment,Medium-High,Mang vali nghi vấn + Che mặt (Khẩu trang N95 + Mũ)
+15,"{
+  glassesSunglasses,
+  hatCap,
+  accessoryMuffler
+}",Partial Face Concealment,Medium,Che phủ khuôn mặt không có khẩu trang (Kính râm + Mũ lưỡi trai + Khăn quàng cổ)

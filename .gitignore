@@ -1,0 +1,22 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Models (download / copy locally)
+*.pt
+*.onnx
+*.onnx.json
+*.onnx.data
+
+# Runtime output
+/events/
+*.log
+/outputs/
+
+# Local config/secrets
+.env
+.env.*
+!.env.example
+
+*.zip

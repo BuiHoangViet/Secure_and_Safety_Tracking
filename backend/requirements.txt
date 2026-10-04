@@ -1,0 +1,10 @@
+ultralytics>=8.1
+opencv-python>=4.8
+numpy
+fastapi
+uvicorn
+torch
+transformers>=4.40     # CLIP zero-shot fallback for attributes
+onnxruntime            # only used when human_attr/model_68.onnx is present
+pyyaml
+python-multipart

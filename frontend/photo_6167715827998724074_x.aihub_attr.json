@@ -1,0 +1,640 @@
+{
+  "image": "D:\\soict\\Qualcomm_Robotics_NPU\\human_attr\\photo_6167715827998724074_x.jpg",
+  "job_url": "https://workbench.aihub.qualcomm.com/jobs/jgd2ky165/",
+  "positive_attributes": [
+    {
+      "head": "age",
+      "label": "personalLess30",
+      "prob": 0.6850925087928772,
+      "logit": 0.7772749662399292
+    },
+    {
+      "head": "gender",
+      "label": "personalMale",
+      "prob": 0.9952957034111023,
+      "logit": 5.354560852050781
+    },
+    {
+      "head": "body",
+      "label": "bodyFull",
+      "prob": 0.9980111122131348,
+      "logit": 6.218199729919434
+    },
+    {
+      "head": "accessory",
+      "label": "accessoryNothing",
+      "prob": 0.8255699276924133,
+      "logit": 1.5545499324798584
+    },
+    {
+      "head": "hat_type",
+      "label": "hatNone",
+      "prob": 0.9939128756523132,
+      "logit": 5.095468997955322
+    },
+    {
+      "head": "mask_type",
+      "label": "maskNone",
+      "prob": 0.999541163444519,
+      "logit": 7.686385631561279
+    },
+    {
+      "head": "glasses_type",
+      "label": "glassesEyeglasses",
+      "prob": 0.9985912442207336,
+      "logit": 6.563654899597168
+    },
+    {
+      "head": "carrying",
+      "label": "carryingOther",
+      "prob": 0.7211157083511353,
+      "logit": 0.9500026702880859
+    },
+    {
+      "head": "hair_style",
+      "label": "hairShort",
+      "prob": 0.9830285310745239,
+      "logit": 4.059102535247803
+    },
+    {
+      "head": "hair_color",
+      "label": "hairBlack",
+      "prob": 0.9453191161155701,
+      "logit": 2.850008010864258
+    },
+    {
+      "head": "upper_body_style",
+      "label": "upperBodyShortSleeve",
+      "prob": 0.9956831932067871,
+      "logit": 5.440924644470215
+    },
+    {
+      "head": "upper_body_style",
+      "label": "upperBodyCasual",
+      "prob": 0.971829891204834,
+      "logit": 3.540919065475464
+    },
+    {
+      "head": "upper_body_style",
+      "label": "upperBodyLogo",
+      "prob": 0.8965158462524414,
+      "logit": 2.1590969562530518
+    },
+    {
+      "head": "upper_body_style",
+      "label": "upperBodyTshirt",
+      "prob": 0.9815258979797363,
+      "logit": 3.97273850440979
+    },
+    {
+      "head": "upper_body_color",
+      "label": "upperBodyBlack",
+      "prob": 0.9906561970710754,
+      "logit": 4.663649559020996
+    },
+    {
+      "head": "lower_body_style",
+      "label": "lowerBodyTrousers",
+      "prob": 0.9844108819961548,
+      "logit": 4.145466327667236
+    },
+    {
+      "head": "lower_body_style",
+      "label": "lowerBodyCasual",
+      "prob": 0.9798929691314697,
+      "logit": 3.8863747119903564
+    },
+    {
+      "head": "lower_body_color",
+      "label": "lowerBodyBlack",
+      "prob": 0.9244603514671326,
+      "logit": 2.5045526027679443
+    },
+    {
+      "head": "footwear_type",
+      "label": "footwearSandals",
+      "prob": 0.9302747249603271,
+      "logit": 2.590916395187378
+    },
+    {
+      "head": "footwear_type",
+      "label": "footwearSneaker",
+      "prob": 0.543074905872345,
+      "logit": 0.1727277636528015
+    },
+    {
+      "head": "footwear_color",
+      "label": "footwearBlack",
+      "prob": 0.6267228722572327,
+      "logit": 0.5181832909584045
+    },
+    {
+      "head": "viewpoint",
+      "label": "viewpointFront",
+      "prob": 0.9978321194648743,
+      "logit": 6.131835460662842
+    }
+  ],
+  "attributes": {
+    "personalLess15": 0,
+    "personalLess30": 1,
+    "personalLess45": 0,
+    "personalLess60": 0,
+    "personalLarger60": 0,
+    "personalMale": 1,
+    "personalFemale": 0,
+    "bodyFull": 1,
+    "bodyUpperHalf": 0,
+    "bodyLowerHalf": 0,
+    "accessoryMuffler": 0,
+    "accessoryNothing": 1,
+    "accessoryHeadphone": 0,
+    "accessoryHairBand": 0,
+    "accessoryKerchief": 0,
+    "hatNone": 1,
+    "hatCap": 0,
+    "hatBeanie": 0,
+    "hatHelmet": 0,
+    "hatOthers": 0,
+    "hatBlack": 0,
+    "hatGrey": 0,
+    "hatWhite": 0,
+    "hatBrown": 0,
+    "hatRed": 0,
+    "hatPink": 0,
+    "hatYellow": 0,
+    "hatOrange": 0,
+    "hatGreen": 0,
+    "hatBlue": 0,
+    "hatPurple": 0,
+    "maskNone": 1,
+    "maskSurgical": 0,
+    "maskClothN95": 0,
+    "glassesNone": 0,
+    "glassesEyeglasses": 1,
+    "glassesSunglasses": 0,
+    "glassesOthers": 0,
+    "carryingBackpack": 0,
+    "carryingOther": 1,
+    "carryingMessengerBag": 0,
+    "carryingNothing": 0,
+    "carryingPlasticBags": 0,
+    "carryingBabyBuggy": 0,
+    "carryingShoppingTro": 0,
+    "carryingUmbrella": 0,
+    "carryingFolder": 0,
+    "carryingLuggageCase": 0,
+    "carryingSuitcase": 0,
+    "hairShort": 1,
+    "hairLong": 0,
+    "hairBald": 0,
+    "hairBlack": 1,
+    "hairGrey": 0,
+    "hairWhite": 0,
+    "hairBrown": 0,
+    "hairRed": 0,
+    "hairPink": 0,
+    "hairYellow": 0,
+    "hairOrange": 0,
+    "hairGreen": 0,
+    "hairBlue": 0,
+    "hairPurple": 0,
+    "upperBodyShortSleeve": 1,
+    "upperBodyLongSleeve": 0,
+    "upperBodyCasual": 1,
+    "upperBodyFormal": 0,
+    "upperBodyJacket": 0,
+    "upperBodyLogo": 1,
+    "upperBodyPlaid": 0,
+    "upperBodyThinStripes": 0,
+    "upperBodyTshirt": 1,
+    "upperBodyOther": 0,
+    "upperBodyVNeck": 0,
+    "upperBodyNoSleeve": 0,
+    "upperBodySuit": 0,
+    "upperBodySweater": 0,
+    "upperBodyThickStripes": 0,
+    "upperBodyBlack": 1,
+    "upperBodyGrey": 0,
+    "upperBodyWhite": 0,
+    "upperBodyBrown": 0,
+    "upperBodyRed": 0,
+    "upperBodyPink": 0,
+    "upperBodyYellow": 0,
+    "upperBodyOrange": 0,
+    "upperBodyGreen": 0,
+    "upperBodyBlue": 0,
+    "upperBodyPurple": 0,
+    "lowerBodyShorts": 0,
+    "lowerBodyTrousers": 1,
+    "lowerBodyShortSkirt": 0,
+    "lowerBodyLongSkirt": 0,
+    "lowerBodyCasual": 1,
+    "lowerBodyFormal": 0,
+    "lowerBodyJeans": 0,
+    "lowerBodyCapri": 0,
+    "lowerBodyHotPants": 0,
+    "lowerBodyPlaid": 0,
+    "lowerBodyThinStripes": 0,
+    "lowerBodySuits": 0,
+    "lowerBodyBlack": 1,
+    "lowerBodyGrey": 0,
+    "lowerBodyWhite": 0,
+    "lowerBodyBrown": 0,
+    "lowerBodyRed": 0,
+    "lowerBodyPink": 0,
+    "lowerBodyYellow": 0,
+    "lowerBodyOrange": 0,
+    "lowerBodyGreen": 0,
+    "lowerBodyBlue": 0,
+    "lowerBodyPurple": 0,
+    "footwearShoes": 0,
+    "footwearLeatherShoes": 0,
+    "footwearSandals": 1,
+    "footwearSneaker": 1,
+    "footwearBoots": 0,
+    "footwearStocking": 0,
+    "footwearBlack": 1,
+    "footwearGrey": 0,
+    "footwearWhite": 0,
+    "footwearBrown": 0,
+    "footwearRed": 0,
+    "footwearPink": 0,
+    "footwearYellow": 0,
+    "footwearOrange": 0,
+    "footwearGreen": 0,
+    "footwearBlue": 0,
+    "footwearPurple": 0,
+    "viewpointFront": 1,
+    "viewpointBack": 0,
+    "viewpointSide": 0
+  },
+  "postprocess": [
+    {
+      "type": "group_top1",
+      "head": "age",
+      "group": "age",
+      "selected": "personalLess30",
+      "best_label": "personalLess30",
+      "best_prob": 0.6850925087928772,
+      "threshold": 0.5,
+      "labels": [
+        "personalLess15",
+        "personalLess30",
+        "personalLess45",
+        "personalLess60",
+        "personalLarger60"
+      ]
+    },
+    {
+      "type": "group_top1",
+      "head": "gender",
+      "group": "gender",
+      "selected": "personalMale",
+      "best_label": "personalMale",
+      "best_prob": 0.9952957034111023,
+      "threshold": 0.5,
+      "labels": [
+        "personalMale",
+        "personalFemale"
+      ]
+    },
+    {
+      "type": "group_top1",
+      "head": "body",
+      "group": "body",
+      "selected": "bodyFull",
+      "best_label": "bodyFull",
+      "best_prob": 0.9980111122131348,
+      "threshold": 0.5,
+      "labels": [
+        "bodyFull",
+        "bodyUpperHalf",
+        "bodyLowerHalf"
+      ]
+    },
+    {
+      "type": "group_top1",
+      "head": "hat_type",
+      "group": "hat_type",
+      "selected": "hatNone",
+      "best_label": "hatNone",
+      "best_prob": 0.9939128756523132,
+      "threshold": 0.45,
+      "labels": [
+        "hatNone",
+        "hatCap",
+        "hatBeanie",
+        "hatHelmet",
+        "hatOthers"
+      ]
+    },
+    {
+      "type": "group_top1",
+      "head": "hat_color",
+      "group": "hat_color",
+      "selected": null,
+      "best_label": "hatBlack",
+      "best_prob": 0.021881043910980225,
+      "threshold": 0.35,
+      "labels": [
+        "hatBlack",
+        "hatGrey",
+        "hatWhite",
+        "hatBrown",
+        "hatRed",
+        "hatPink",
+        "hatYellow",
+        "hatOrange",
+        "hatGreen",
+        "hatBlue",
+        "hatPurple"
+      ]
+    },
+    {
+      "type": "group_top1",
+      "head": "mask_type",
+      "group": "mask_type",
+      "selected": "maskNone",
+      "best_label": "maskNone",
+      "best_prob": 0.999541163444519,
+      "threshold": 0.45,
+      "labels": [
+        "maskNone",
+        "maskSurgical",
+        "maskClothN95"
+      ]
+    },
+    {
+      "type": "group_top1",
+      "head": "glasses_type",
+      "group": "glasses_type",
+      "selected": "glassesEyeglasses",
+      "best_label": "glassesEyeglasses",
+      "best_prob": 0.9985912442207336,
+      "threshold": 0.45,
+      "labels": [
+        "glassesNone",
+        "glassesEyeglasses",
+        "glassesSunglasses",
+        "glassesOthers"
+      ]
+    },
+    {
+      "type": "group_top1",
+      "head": "hair_style",
+      "group": "hair_style",
+      "selected": "hairShort",
+      "best_label": "hairShort",
+      "best_prob": 0.9830285310745239,
+      "threshold": 0.5,
+      "labels": [
+        "hairShort",
+        "hairLong",
+        "hairBald"
+      ]
+    },
+    {
+      "type": "group_top1",
+      "head": "hair_color",
+      "group": "hair_color",
+      "selected": "hairBlack",
+      "best_label": "hairBlack",
+      "best_prob": 0.9453191161155701,
+      "threshold": 0.5,
+      "labels": [
+        "hairBlack",
+        "hairGrey",
+        "hairWhite",
+        "hairBrown",
+        "hairRed",
+        "hairPink",
+        "hairYellow",
+        "hairOrange",
+        "hairGreen",
+        "hairBlue",
+        "hairPurple"
+      ]
+    },
+    {
+      "type": "group_top1",
+      "head": "upper_body_style",
+      "group": "formality",
+      "selected": "upperBodyCasual",
+      "best_label": "upperBodyCasual",
+      "best_prob": 0.971829891204834,
+      "threshold": 0.5,
+      "labels": [
+        "upperBodyCasual",
+        "upperBodyFormal"
+      ]
+    },
+    {
+      "type": "group_top1",
+      "head": "upper_body_style",
+      "group": "garment_layer",
+      "selected": "upperBodyTshirt",
+      "best_label": "upperBodyTshirt",
+      "best_prob": 0.9815258979797363,
+      "threshold": 0.5,
+      "labels": [
+        "upperBodyJacket",
+        "upperBodyTshirt",
+        "upperBodySuit",
+        "upperBodySweater"
+      ]
+    },
+    {
+      "type": "group_top1",
+      "head": "upper_body_style",
+      "group": "sleeve",
+      "selected": "upperBodyShortSleeve",
+      "best_label": "upperBodyShortSleeve",
+      "best_prob": 0.9956831932067871,
+      "threshold": 0.5,
+      "labels": [
+        "upperBodyShortSleeve",
+        "upperBodyLongSleeve",
+        "upperBodyNoSleeve"
+      ]
+    },
+    {
+      "type": "group_top1",
+      "head": "upper_body_style",
+      "group": "neck",
+      "selected": null,
+      "best_label": "upperBodyVNeck",
+      "best_prob": 0.21493040025234222,
+      "threshold": 0.5,
+      "labels": [
+        "upperBodyVNeck"
+      ]
+    },
+    {
+      "type": "group_top1",
+      "head": "upper_body_style",
+      "group": "pattern_logo",
+      "selected": "upperBodyLogo",
+      "best_label": "upperBodyLogo",
+      "best_prob": 0.8965158462524414,
+      "threshold": 0.5,
+      "labels": [
+        "upperBodyLogo",
+        "upperBodyPlaid",
+        "upperBodyThinStripes",
+        "upperBodyThickStripes"
+      ]
+    },
+    {
+      "type": "group_top1",
+      "head": "upper_body_style",
+      "group": "other",
+      "selected": null,
+      "best_label": "upperBodyOther",
+      "best_prob": 0.24550513923168182,
+      "threshold": 0.5,
+      "labels": [
+        "upperBodyOther"
+      ]
+    },
+    {
+      "type": "group_top1",
+      "head": "upper_body_color",
+      "group": "upper_body_color",
+      "selected": "upperBodyBlack",
+      "best_label": "upperBodyBlack",
+      "best_prob": 0.9906561970710754,
+      "threshold": 0.35,
+      "labels": [
+        "upperBodyBlack",
+        "upperBodyGrey",
+        "upperBodyWhite",
+        "upperBodyBrown",
+        "upperBodyRed",
+        "upperBodyPink",
+        "upperBodyYellow",
+        "upperBodyOrange",
+        "upperBodyGreen",
+        "upperBodyBlue",
+        "upperBodyPurple"
+      ]
+    },
+    {
+      "type": "group_top1",
+      "head": "lower_body_style",
+      "group": "formality",
+      "selected": "lowerBodyCasual",
+      "best_label": "lowerBodyCasual",
+      "best_prob": 0.9798929691314697,
+      "threshold": 0.5,
+      "labels": [
+        "lowerBodyCasual",
+        "lowerBodyFormal"
+      ]
+    },
+    {
+      "type": "group_top1",
+      "head": "lower_body_style",
+      "group": "garment_skirt",
+      "selected": "lowerBodyTrousers",
+      "best_label": "lowerBodyTrousers",
+      "best_prob": 0.9844108819961548,
+      "threshold": 0.5,
+      "labels": [
+        "lowerBodyJeans",
+        "lowerBodyShorts",
+        "lowerBodyShortSkirt",
+        "lowerBodyTrousers",
+        "lowerBodyCapri",
+        "lowerBodyHotPants",
+        "lowerBodyLongSkirt",
+        "lowerBodySuits"
+      ]
+    },
+    {
+      "type": "group_top1",
+      "head": "lower_body_style",
+      "group": "pattern",
+      "selected": null,
+      "best_label": "lowerBodyThinStripes",
+      "best_prob": 0.0033347539138048887,
+      "threshold": 0.5,
+      "labels": [
+        "lowerBodyPlaid",
+        "lowerBodyThinStripes"
+      ]
+    },
+    {
+      "type": "group_top1",
+      "head": "lower_body_color",
+      "group": "lower_body_color",
+      "selected": "lowerBodyBlack",
+      "best_label": "lowerBodyBlack",
+      "best_prob": 0.9244603514671326,
+      "threshold": 0.35,
+      "labels": [
+        "lowerBodyBlack",
+        "lowerBodyGrey",
+        "lowerBodyWhite",
+        "lowerBodyBrown",
+        "lowerBodyRed",
+        "lowerBodyPink",
+        "lowerBodyYellow",
+        "lowerBodyOrange",
+        "lowerBodyGreen",
+        "lowerBodyBlue",
+        "lowerBodyPurple"
+      ]
+    },
+    {
+      "type": "group_top1",
+      "head": "footwear_color",
+      "group": "footwear_color",
+      "selected": "footwearBlack",
+      "best_label": "footwearBlack",
+      "best_prob": 0.6267228722572327,
+      "threshold": 0.5,
+      "labels": [
+        "footwearBlack",
+        "footwearGrey",
+        "footwearWhite",
+        "footwearBrown",
+        "footwearRed",
+        "footwearPink",
+        "footwearYellow",
+        "footwearOrange",
+        "footwearGreen",
+        "footwearBlue",
+        "footwearPurple"
+      ]
+    },
+    {
+      "type": "group_top1",
+      "head": "viewpoint",
+      "group": "viewpoint",
+      "selected": "viewpointFront",
+      "best_label": "viewpointFront",
+      "best_prob": 0.9978321194648743,
+      "threshold": 0.5,
+      "labels": [
+        "viewpointFront",
+        "viewpointBack",
+        "viewpointSide"
+      ]
+    },
+    {
+      "type": "nothing_conflict",
+      "head": "carrying",
+      "nothing_label": "carryingNothing",
+      "selected": "carryingOther",
+      "suppressed": [
+        "carryingNothing"
+      ]
+    },
+    {
+      "type": "dependency_suppress",
+      "head": "hat_color",
+      "suppressed_by": "hat_type:requires_any_positive"
+    }
+  ]
+}
